@@ -17,7 +17,7 @@ public class UsuarioDAO {
 		con = ConexaoFactory.getConnection();
 	}
 
-	public void cadastrar(Usuario usuario) { 
+	public void cadastrar(Usuario usuario) {
 
 		// Comando SQL
 
@@ -150,7 +150,7 @@ public class UsuarioDAO {
 		return lista;
 	}
 
-	public Usuario autenticar(Usuario usuario) {
+	public Usuario autenticar2(Usuario usuario) {
 		// Comando SQL
 		String sql = "select * from usuario where login=? and senha=md5(?)";
 		// Statments
@@ -179,6 +179,40 @@ public class UsuarioDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public Usuario autenticar(Usuario usuConsulta) {
+
+		String sql = "select * from usuario where login=? and senha=?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, usuConsulta.getLogin());
+			ps.setString(2, usuConsulta.getSenha());
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				Usuario usuRetorno = new Usuario();
+
+				usuRetorno.setId(rs.getInt("id"));
+				usuRetorno.setNome(rs.getString("nome"));
+				usuRetorno.setLogin(rs.getString("login"));
+				usuRetorno.setSenha(rs.getString("senha"));
+
+				return usuRetorno;
+			}
+			
+			rs.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+
 	}
 
 }

@@ -15,7 +15,7 @@ public class TestUsuarioDAO {
 		// testSalvar();
 		// testBuscarPorId();
 		// testBuscarTodos();
-		// testAutenticar();
+		 testAutenticar();
 
 	}
 
@@ -56,8 +56,10 @@ public class TestUsuarioDAO {
 	private static void testSalvar() {
 
 		Usuario usuario1 = new Usuario();
-		usuario1.setId(10);
-		usuario1.setNome("Marta");
+		// usuario1.setId(6);
+		usuario1.setNome("Daniel Lucena");
+		usuario1.setLogin("daniel");
+		usuario1.setSenha("123");
 
 		UsuarioDAO usuDAO = new UsuarioDAO();
 		usuDAO.salvar(usuario1);
